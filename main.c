@@ -1,5 +1,6 @@
 #include "header/includeHeaders.h"
 #include "header/constants.h"
+#include "header/customTypes.h"
 
 void init(){
     glClearColor(0, 0, 0, 1);
