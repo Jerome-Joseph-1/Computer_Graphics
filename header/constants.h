@@ -14,4 +14,8 @@
 #define ENEMY_SHIP 2 
 #define SENTRY 3
 
+// SIZE CONSTANTS
+#define SPACE_SHIP_WIDTH 10
+#define SPACE_SHIP_HEIGHT 10
+
 #endif

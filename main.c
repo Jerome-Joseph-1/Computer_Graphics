@@ -2,6 +2,10 @@
 #include "header/constants.h"
 #include "header/customTypes.h"
 
+#include "header/create.h"
+
+obj* ship;
+
 void init(){
     glClearColor(0, 0, 0, 1);
     glMatrixMode( GL_PROJECTION );
@@ -29,6 +33,11 @@ void display(){
     glutSwapBuffers();
 }
 
+void createObjects(){
+    ship = createShip();
+    printf("Ship Created At [%f, %f]\n", ship->x, ship->y);
+}
+
 void refresh(){
 
     // Update Position of space ships / enemy ships etc... 
@@ -43,6 +52,7 @@ int main(int argc, char** argv){
     glutCreateWindow("SPACE INVADERS");
 
     init();
+    createObjects();
 
     glutDisplayFunc(display);
     glutTimerFunc(0, refresh, 0);
