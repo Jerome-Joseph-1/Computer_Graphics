@@ -67,6 +67,6 @@ int main(int argc, char** argv){
     glutKeyboardUpFunc(keyRelease);
     
     glutTimerFunc(0, refresh, 0);
-
+    printf("\n");
     glutMainLoop();
 }
