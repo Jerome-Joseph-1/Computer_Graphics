@@ -4,7 +4,8 @@
 
 #include "header/create.h"
 
-obj* ship;
+obj* ship; // space_ship [ controlled by user ]
+bool keyStates[256];
 
 void init(){
     glClearColor(0, 0, 0, 1);
@@ -38,10 +39,17 @@ void createObjects(){
     printf("Ship Created At [%f, %f]\n", ship->x, ship->y);
 }
 
+void keyPress(unsigned char key, int x, int y){
+    keyStates[key] = 1;
+}
+
+void keyRelease(unsigned char key, int x, int y){
+    keyStates[key] = 0;
+}
+
 void refresh(){
 
     // Update Position of space ships / enemy ships etc... 
-
     glutTimerFunc(16, refresh, 0);
 }
 
@@ -55,6 +63,9 @@ int main(int argc, char** argv){
     createObjects();
 
     glutDisplayFunc(display);
+    glutKeyboardFunc(keyPress);
+    glutKeyboardUpFunc(keyRelease);
+    
     glutTimerFunc(0, refresh, 0);
 
     glutMainLoop();
