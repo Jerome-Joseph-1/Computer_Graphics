@@ -1,6 +1,7 @@
 #include "header/includeHeaders.h"
 #include "header/constants.h"
 #include "header/customTypes.h"
+#include "header/draw.h"
 
 #include "header/create.h"
 
@@ -24,12 +25,7 @@ void display(){
 
     // Demo [ JUST TO TEST display() func ]  
     glColor3f(1, 0, 0);
-    glBegin(GL_POLYGON);
-        glVertex2f(10, 10);
-        glVertex2f(100, 10);
-        glVertex2f(100, 100);
-        glVertex2f(10, 100);
-    glEnd();
+    draw_ship(ship);
 
     glutSwapBuffers();
 }
@@ -67,6 +63,11 @@ int main(int argc, char** argv){
     glutKeyboardUpFunc(keyRelease);
     
     glutTimerFunc(0, refresh, 0);
+
     printf("\n");
+
+    printf("Added by user1\n");
+
+
     glutMainLoop();
 }
