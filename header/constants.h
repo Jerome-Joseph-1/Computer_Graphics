@@ -18,4 +18,7 @@
 #define SPACE_SHIP_WIDTH 10
 #define SPACE_SHIP_HEIGHT 10
 
+//SIZE
+#define SIZE 5
+
 #endif
