@@ -5,8 +5,10 @@
 #include "header/draw.h"
 #include "header/create.h"
 #include "header/move.h"
-obj* ship; // space_ship [ controlled by user ]
+
 bool keyStates[256];
+obj* ship; // space_ship [ controlled by user ]
+obj* enemy_ships[MAX_ENEMY_SHIPS]; // An array that contains pointers to enemy ships
 
 void init(){
     glClearColor(0, 0, 0, 1);
@@ -22,9 +24,9 @@ void display(){
 
     // Display code goes here
 
-
-    // Demo [ JUST TO TEST display() func ]  
-    glColor3f(1, 0, 0);
+    // TODO: Use a for loop to display the enemy ships individually
+    // or pass the array of enemy ships to a function and draw each enemy ship
+    
     draw_ship(ship);
 
     glutSwapBuffers();
@@ -33,6 +35,18 @@ void display(){
 void createObjects(){
     ship = create_ship();
     printf("Ship Created At [%f, %f]\n", ship->x, ship->y);
+
+    // INITIALIZATION
+    for(int i = 0; i < MAX_ENEMY_SHIPS; i++) enemy_ships[i] = NULL; // Initialize all enemy ships to NULL
+
+    // CREATION
+
+    for(int i = 0; i < ENEMY_COUNT; i++){
+        enemy_ships[i] = create_enemy_ship(i); // 'i' is passed as a parameter denoting the count of the enemy ship, this is used to determine in which row the enemy ship is placed 
+        // printf("%f %f\n", enemy_ships[i]->x, enemy_ships[i]->y);
+    }
+
+    
 }
 
 void keyPress(unsigned char key, int x, int y){
