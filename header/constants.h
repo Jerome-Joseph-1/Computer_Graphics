@@ -18,10 +18,19 @@
 #define SPACE_SHIP_WIDTH 10
 #define SPACE_SHIP_HEIGHT 10
 
+#define ENEMY_SHIP_WIDTH 7
+#define ENEMY_SHIP_HEIGHT 7
+
 //SIZE
 #define SIZE 5
 
 // SPEED CONSTANTS
 #define SPACE_SHIP_SPEED 3
+
+
+// MAX COUNT CONSTANTS 
+#define MAX_ENEMY_SHIPS 100
+#define ENEMY_COUNT 20
+#define MAX_PER_ROW 10 // Denotes the number of enemy ships per row
 
 #endif
