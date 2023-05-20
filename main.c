@@ -1,10 +1,10 @@
 #include "header/includeHeaders.h"
 #include "header/constants.h"
 #include "header/customTypes.h"
+
 #include "header/draw.h"
-
 #include "header/create.h"
-
+#include "header/move.h"
 obj* ship; // space_ship [ controlled by user ]
 bool keyStates[256];
 
@@ -31,7 +31,7 @@ void display(){
 }
 
 void createObjects(){
-    ship = createShip();
+    ship = create_ship();
     printf("Ship Created At [%f, %f]\n", ship->x, ship->y);
 }
 
@@ -46,6 +46,8 @@ void keyRelease(unsigned char key, int x, int y){
 void refresh(){
 
     // Update Position of space ships / enemy ships etc... 
+    move_ship(ship, keyStates);
+    glutPostRedisplay();
     glutTimerFunc(16, refresh, 0);
 }
 

@@ -1,6 +1,6 @@
 #ifndef CREATE_H
 #define CREATE_H
 
-obj* createShip();
+obj* create_ship();
 
 #endif

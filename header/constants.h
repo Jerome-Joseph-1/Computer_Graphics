@@ -21,4 +21,7 @@
 //SIZE
 #define SIZE 5
 
+// SPEED CONSTANTS
+#define SPACE_SHIP_SPEED 3
+
 #endif
