@@ -97,6 +97,7 @@ void setUpImages(){
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     unsigned char* backgroundData = loadImage("textures/background.bmp", WINDOW_X, WINDOW_Y);
+    unsigned char* shipData = loadImage("textures/ship.bmp", SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT);
 
     glGenTextures(1, &backgroundTexture);
     glBindTexture(GL_TEXTURE_2D, backgroundTexture);
@@ -106,6 +107,15 @@ void setUpImages(){
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, WINDOW_X, WINDOW_Y, 0, GL_RGBA, GL_UNSIGNED_BYTE, backgroundData);
 
+	glGenTextures(1, &shipTexture);
+    glBindTexture(GL_TEXTURE_2D, shipTexture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, shipData);
+
+    free(shipData);
     free(backgroundData);
 }
 
@@ -135,12 +145,27 @@ void drawBackground(){
     glDisable(GL_TEXTURE_2D);
 }
 
-void draw_ship(obj *point)
-{
-	glColor3f(0.0,1.0,0.0);
-	glBegin(GL_POLYGON);
-	glVertex2f(point->x+(SIZE/3.0f),point->y-(2.0*(SIZE/3.0f)));
-	glVertex2f(point->x-(SIZE/3.0f),point->y+(SIZE/3.0f));
-	glVertex2f(point->x+(2.0f*(SIZE/3.0f)),point->y+(SIZE/3.0f));
-	glEnd();
+void draw_ship(obj* ship){
+
+    glEnable(GL_TEXTURE_2D);
+
+    // Bind the texture
+    glBindTexture(GL_TEXTURE_2D, shipTexture);
+
+    // Enable texture mapping
+    glEnable(GL_TEXTURE_2D);
+
+    glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
+        glVertex2f(ship->x - SPACE_SHIP_WIDTH / 2 - 5, ship->y - SPACE_SHIP_HEIGHT / 2);
+        glTexCoord2f(1, 0);
+        glVertex2f(ship->x + SPACE_SHIP_WIDTH / 2 - 5, ship->y - SPACE_SHIP_HEIGHT / 2);
+        glTexCoord2f(1, 1);
+        glVertex2f(ship->x + SPACE_SHIP_WIDTH / 2 - 5, ship->y + SPACE_SHIP_HEIGHT / 2);
+        glTexCoord2f(0, 1);
+        glVertex2f(ship->x - SPACE_SHIP_WIDTH / 2 - 5, ship->y + SPACE_SHIP_HEIGHT / 2);
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+
 }
