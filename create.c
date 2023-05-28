@@ -38,3 +38,12 @@ obj* create_enemy_ship(int count) {
     
     return enemy_ship;
 }
+
+bullet* createBullet(obj* ship){
+    bullet* b = (bullet *)malloc(sizeof(bullet));
+    b->x = ship->x;
+    b->y = ship->y;
+    b->present = true;
+
+    return b;
+}

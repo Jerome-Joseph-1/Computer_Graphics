@@ -15,8 +15,8 @@
 #define SENTRY 3
 
 // SIZE CONSTANTS
-#define SPACE_SHIP_WIDTH 10
-#define SPACE_SHIP_HEIGHT 10
+#define SPACE_SHIP_WIDTH 50
+#define SPACE_SHIP_HEIGHT 95
 
 #define ENEMY_SHIP_WIDTH 7
 #define ENEMY_SHIP_HEIGHT 7
@@ -25,12 +25,15 @@
 #define SIZE 5
 
 // SPEED CONSTANTS
-#define SPACE_SHIP_SPEED 3
+#define SPACE_SHIP_SPEED 5
+#define SPACE_SHIP_BULLET_SPEED 15
 
 
 // MAX COUNT CONSTANTS 
 #define MAX_ENEMY_SHIPS 100
 #define ENEMY_COUNT 20
 #define MAX_PER_ROW 10 // Denotes the number of enemy ships per row
+
+#define MAX_BULLETS 4
 
 #endif

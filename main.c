@@ -8,6 +8,12 @@
 
 GAME_STATE gameState;
 
+// Bullet Variables
+int bulletNumber = 0;
+bool bulletBufferFilled = false;   
+bullet* bullets[MAX_BULLETS];
+
+// Ship Variables
 bool keyStates[256];
 obj* ship; // space_ship [ controlled by user ]
 obj* enemy_ships[MAX_ENEMY_SHIPS]; // An array that contains pointers to enemy ships
@@ -28,39 +34,14 @@ void display(){
 
     // TODO: Use a for loop to display the enemy ships individually
     // or pass the array of enemy ships to a function and draw each enemy ship
-    drawBackground();
+    draw_background();
     if(gameState == GAME_START) {
+        draw_bullets(bullets);
         draw_ship(ship);
     }
     else if(gameState == MAIN_MENU) {
         // Implement Main Menu
-        glColor3f(1, 1, 1);
-
-        // Define the titles and their positions
-        const char* titles[] = {"SPACE INVADERS", "START", "EXIT"};
-        const int numTitles = sizeof(titles) / sizeof(titles[0]);
-        const float yOffset[] = {WINDOW_X / 4 + WINDOW_Y / 2, WINDOW_Y / 2 - WINDOW_Y / 30, WINDOW_Y / 2 - WINDOW_Y / 10};
-
-        void* font = GLUT_BITMAP_HELVETICA_18;
-
-        for (int i = 0; i < numTitles; i++) {
-            const char* title = titles[i];
-            int titleWidth = 0;
-            if(i != 0) 
-                glColor3f(0, 1, 0);
-            for (int j = 0; title[j] != '\0'; j++) {
-                titleWidth += glutBitmapWidth(font, title[j]);
-            }
-
-            glRasterPos2i(WINDOW_X / 2 - titleWidth / 2, yOffset[i]);
-
-            for (int j = 0; title[j] != '\0'; j++) {
-                glutBitmapCharacter(font, title[j]);
-            }
-        }
-
-        // Reset the text color
-        glColor3f(1, 1, 1);
+        draw_menu();
     }
     else {
         // Game Over 
@@ -98,6 +79,11 @@ void keyRelease(unsigned char key, int x, int y){
 void mouseClick(int btn, int state, int x, int y){
     if(gameState == GAME_START ) {
         // Implement Bullet Functions
+        if(btn == 0 && !bulletBufferFilled && state) {
+            bullet* b = createBullet(ship);
+            bullets[bulletNumber] = b;
+            bulletNumber = ++bulletNumber % MAX_BULLETS;
+        }
     } else if(gameState == MAIN_MENU) {
         if(btn == 0 && state == GLUT_DOWN) {
             if(x >= 900 && x <= 1000 && y >= 500 && y <= 599){
@@ -116,6 +102,7 @@ void refresh(){
 
     // Update Position of space ships / enemy ships etc... 
     move_ship(ship, keyStates);
+    move_bullet(bullets, &bulletBufferFilled);
     glutPostRedisplay();
     glutTimerFunc(16, refresh, 0);
 }
@@ -123,7 +110,7 @@ void refresh(){
 void initialize_all_objects(){
     gameState = MAIN_MENU;
     createObjects();
-    setUpImages(); // Present in draw.c 
+    set_up_images(); // Present in draw.c 
 }
 
 int main(int argc, char** argv){
