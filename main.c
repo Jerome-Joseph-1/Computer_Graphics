@@ -8,6 +8,12 @@
 
 GAME_STATE gameState;
 
+// Bullet Variables
+int bulletNumber = 0;
+bool bulletBufferFilled = false;   
+bullet* bullets[MAX_BULLETS];
+
+// Ship Variables
 bool keyStates[256];
 obj* ship; // space_ship [ controlled by user ]
 obj* enemy_ships[MAX_ENEMY_SHIPS]; // An array that contains pointers to enemy ships

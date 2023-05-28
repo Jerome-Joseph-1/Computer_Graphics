@@ -33,4 +33,6 @@
 #define ENEMY_COUNT 20
 #define MAX_PER_ROW 10 // Denotes the number of enemy ships per row
 
+#define MAX_BULLETS 3
+
 #endif

@@ -20,7 +20,7 @@ typedef struct object {
     float hp;
 }obj;
 
-typedef struct bullet {
+typedef struct Bullet {
     float x;      // stores location of a bullet 
     float y;
     
