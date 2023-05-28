@@ -28,6 +28,7 @@ void display(){
 
     // TODO: Use a for loop to display the enemy ships individually
     // or pass the array of enemy ships to a function and draw each enemy ship
+    drawBackground();
     if(gameState == GAME_START) {
         draw_ship(ship);
     }
@@ -122,6 +123,7 @@ void refresh(){
 void initialize_all_objects(){
     gameState = MAIN_MENU;
     createObjects();
+    setUpImages(); // Present in draw.c 
 }
 
 int main(int argc, char** argv){
