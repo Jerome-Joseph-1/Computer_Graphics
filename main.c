@@ -6,6 +6,8 @@
 #include "header/create.h"
 #include "header/move.h"
 
+GAME_STATE gameState;
+
 bool keyStates[256];
 obj* ship; // space_ship [ controlled by user ]
 obj* enemy_ships[MAX_ENEMY_SHIPS]; // An array that contains pointers to enemy ships
@@ -26,8 +28,43 @@ void display(){
 
     // TODO: Use a for loop to display the enemy ships individually
     // or pass the array of enemy ships to a function and draw each enemy ship
-    
-    draw_ship(ship);
+    if(gameState == GAME_START) {
+        draw_ship(ship);
+    }
+    else if(gameState == MAIN_MENU) {
+        // Implement Main Menu
+        glColor3f(1, 1, 1);
+
+        // Define the titles and their positions
+        const char* titles[] = {"SPACE INVADERS", "START", "EXIT"};
+        const int numTitles = sizeof(titles) / sizeof(titles[0]);
+        const float yOffset[] = {WINDOW_X / 4 + WINDOW_Y / 2, WINDOW_Y / 2 - WINDOW_Y / 30, WINDOW_Y / 2 - WINDOW_Y / 10};
+
+        void* font = GLUT_BITMAP_HELVETICA_18;
+
+        for (int i = 0; i < numTitles; i++) {
+            const char* title = titles[i];
+            int titleWidth = 0;
+            if(i != 0) 
+                glColor3f(0, 1, 0);
+            for (int j = 0; title[j] != '\0'; j++) {
+                titleWidth += glutBitmapWidth(font, title[j]);
+            }
+
+            glRasterPos2i(WINDOW_X / 2 - titleWidth / 2, yOffset[i]);
+
+            for (int j = 0; title[j] != '\0'; j++) {
+                glutBitmapCharacter(font, title[j]);
+            }
+        }
+
+        // Reset the text color
+        glColor3f(1, 1, 1);
+    }
+    else {
+        // Game Over 
+        // Display Score
+    }
 
     glutSwapBuffers();
 }
@@ -65,6 +102,11 @@ void refresh(){
     glutTimerFunc(16, refresh, 0);
 }
 
+void initialize_all_objects(){
+    gameState = MAIN_MENU;
+    createObjects();
+}
+
 int main(int argc, char** argv){
     glutInit(&argc, argv);
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
@@ -72,7 +114,7 @@ int main(int argc, char** argv){
     glutCreateWindow("SPACE INVADERS");
 
     init();
-    createObjects();
+    initialize_all_objects();
 
     glutDisplayFunc(display);
     glutKeyboardFunc(keyPress);
