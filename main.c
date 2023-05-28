@@ -94,6 +94,23 @@ void keyRelease(unsigned char key, int x, int y){
     keyStates[key] = 0;
 }
 
+void mouseClick(int btn, int state, int x, int y){
+    if(gameState == GAME_START ) {
+        // Implement Bullet Functions
+    } else if(gameState == MAIN_MENU) {
+        if(btn == 0 && state == GLUT_DOWN) {
+            if(x >= 900 && x <= 1000 && y >= 500 && y <= 599){
+                // Start Game
+                gameState = GAME_START;
+            }
+            else if(x >= 900 && x <= 1000 && y >= 600 && y <= 710) 
+                exit(0); // Exit the Game 
+        }
+    } else {
+        // Implement Game Over Page Mouse clicks
+    }
+}
+
 void refresh(){
 
     // Update Position of space ships / enemy ships etc... 
@@ -120,12 +137,9 @@ int main(int argc, char** argv){
     glutKeyboardFunc(keyPress);
     glutKeyboardUpFunc(keyRelease);
     
+    glutMouseFunc(mouseClick);
+
     glutTimerFunc(0, refresh, 0);
-
-    printf("\n");
-
-    printf("Added by user1\n");
-
 
     glutMainLoop();
 }
