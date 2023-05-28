@@ -20,6 +20,14 @@ typedef struct object {
     float hp;
 }obj;
 
+typedef struct bullet {
+    float x;      // stores location of a bullet 
+    float y;
+    
+    bool present; // present is true if bullet is present on screen 
+
+} bullet;
+
 typedef enum { // Game States
     MAIN_MENU,
     GAME_START,
