@@ -20,4 +20,10 @@ typedef struct object {
     float hp;
 }obj;
 
+typedef enum { // Game States
+    MAIN_MENU,
+    GAME_START,
+    GAME_OVER
+}GAME_STATE;
+
 #endif
