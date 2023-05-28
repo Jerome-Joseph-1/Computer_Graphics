@@ -121,7 +121,6 @@ void set_up_images(){
 
 void draw_background(){
     glColor3f(1,1,1);
-    glEnable(GL_TEXTURE_2D);
 
     // Bind the texture
     glBindTexture(GL_TEXTURE_2D, backgroundTexture);
@@ -147,13 +146,12 @@ void draw_background(){
 
 void draw_ship(obj* ship){
 
+    // Enable texture mapping
     glEnable(GL_TEXTURE_2D);
 
     // Bind the texture
     glBindTexture(GL_TEXTURE_2D, shipTexture);
 
-    // Enable texture mapping
-    glEnable(GL_TEXTURE_2D);
 
     glBegin(GL_QUADS);
         glTexCoord2f(0, 0);
