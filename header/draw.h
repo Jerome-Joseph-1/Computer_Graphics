@@ -4,10 +4,13 @@
 //function prototype of draw_ship
 
 void draw_ship(obj *point);
-void drawBackground();
+void draw_menu();
+void draw_background();
 
 // functions to load textures
-void setUpImages();
+void set_up_images();
+
+void draw_bullets(bullet* bullets[MAX_BULLETS]);
 
 
 #endif

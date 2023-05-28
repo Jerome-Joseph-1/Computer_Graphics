@@ -92,7 +92,7 @@ unsigned char* loadImage(char* filename, unsigned int targetWidth, unsigned int 
     return resizedData;
 }
 
-void setUpImages(){
+void set_up_images(){
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -119,7 +119,7 @@ void setUpImages(){
     free(backgroundData);
 }
 
-void drawBackground(){
+void draw_background(){
     glColor3f(1,1,1);
     glEnable(GL_TEXTURE_2D);
 
@@ -168,4 +168,53 @@ void draw_ship(obj* ship){
 
     glDisable(GL_TEXTURE_2D);
 
+}
+
+void draw_bullets(bullet* bullets[MAX_BULLETS]){
+	glPointSize(1.0);
+    glLineWidth(3.0f);
+    glColor4f(0.0f, 1.0f, 0.3f, 0.5f);
+
+	for(int i = 0; i < MAX_BULLETS; i++) {
+        if(bullets[i]) {
+            // Set the color and size of the bullet
+            glBegin(GL_LINE_LOOP);
+                glVertex2f(bullets[i]->x, bullets[i]->y - 22);
+                glVertex2f(bullets[i]->x, bullets[i]->y - 10);
+                glVertex2f(bullets[i]->x, bullets[i]->y);
+            glEnd();
+
+        }
+    }
+	glColor3f(1,1,1);
+}
+
+void draw_menu(){
+	glColor3f(1, 1, 1);
+
+        // Define the titles and their positions
+        const char* titles[] = {"SPACE INVADERS", "START", "EXIT"};
+        const int numTitles = sizeof(titles) / sizeof(titles[0]);
+        const float yOffset[] = {WINDOW_X / 4 + WINDOW_Y / 2, WINDOW_Y / 2 - WINDOW_Y / 30, WINDOW_Y / 2 - WINDOW_Y / 10};
+
+        void* font = GLUT_BITMAP_HELVETICA_18;
+
+        for (int i = 0; i < numTitles; i++) {
+            const char* title = titles[i];
+            int titleWidth = 0;
+            if(i != 0) 
+                glColor3f(0, 1, 0);
+            for (int j = 0; title[j] != '\0'; j++) {
+                titleWidth += glutBitmapWidth(font, title[j]);
+            }
+
+            glRasterPos2i(WINDOW_X / 2 - titleWidth / 2, yOffset[i]);
+
+            for (int j = 0; title[j] != '\0'; j++) {
+                glutBitmapCharacter(font, title[j]);
+            }
+        }
+
+        // Reset the text color
+        glColor3f(1, 1, 1);
 }
