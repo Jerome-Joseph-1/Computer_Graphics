@@ -18,8 +18,8 @@
 #define SPACE_SHIP_WIDTH 50
 #define SPACE_SHIP_HEIGHT 95
 
-#define ENEMY_SHIP_WIDTH 7
-#define ENEMY_SHIP_HEIGHT 7
+#define ENEMY_SHIP_WIDTH 35
+#define ENEMY_SHIP_HEIGHT 35
 
 //SIZE
 #define SIZE 5
@@ -34,6 +34,6 @@
 #define ENEMY_COUNT 20
 #define MAX_PER_ROW 10 // Denotes the number of enemy ships per row
 
-#define MAX_BULLETS 4
+#define MAX_BULLETS 5 // Denotes max number of bullets that can be present on screen
 
 #endif

@@ -3,6 +3,6 @@
 
 obj* create_ship();
 obj* create_enemy_ship(int count);
-bullet* createBullet(obj* ship);
+bullet* create_bullet(obj* ship);
 
 #endif

@@ -80,7 +80,7 @@ void mouseClick(int btn, int state, int x, int y){
     if(gameState == GAME_START ) {
         // Implement Bullet Functions
         if(btn == 0 && !bulletBufferFilled && state) {
-            bullet* b = createBullet(ship);
+            bullet* b = create_bullet(ship);
             bullets[bulletNumber] = b;
             bulletNumber = ++bulletNumber % MAX_BULLETS;
         }
