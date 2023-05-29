@@ -19,10 +19,10 @@ obj* create_enemy_ship(int count) {
     int col = count % MAX_PER_ROW;
 
     // Define initial positions and offsets
-    float initial_x = 500;
+    float initial_x = 400;
     float initial_y = WINDOW_Y - 300;
-    float offset_x = ENEMY_SHIP_WIDTH;
-    float offset_y = ENEMY_SHIP_HEIGHT;
+    float offset_x = 100;
+    float offset_y = 100;
 
     // Allocate memory for the enemy ship object
     obj* enemy_ship = (obj*) malloc(sizeof(obj));

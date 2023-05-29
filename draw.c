@@ -168,6 +168,15 @@ void draw_ship(obj* ship){
 
 }
 
+void draw_enemy_ship(obj* enemy_ship) {
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(enemy_ship->x - 10, enemy_ship->y - 10);
+        glVertex2f(enemy_ship->x - 10, enemy_ship->y + 10);
+        glVertex2f(enemy_ship->x + 10, enemy_ship->y + 10);
+        glVertex2f(enemy_ship->x + 10, enemy_ship->y - 10);
+    glEnd();
+}
+
 void draw_bullets(bullet* bullets[MAX_BULLETS]){
 	glPointSize(1.0);
     glLineWidth(3.0f);
