@@ -26,3 +26,15 @@ void move_bullet(bullet* bullets[MAX_BULLETS], bool* bulletBufferFilled){
     if(count >= MAX_BULLETS) *bulletBufferFilled = true;
     else *bulletBufferFilled = false;
 }
+
+void move_enemy_ships(obj* enemy_ships[MAX_ENEMY_SHIPS], float* theta){
+    int major_axis = 250, minor_axis = 100;
+    for(int i = 0; i < MAX_ENEMY_SHIPS; i++) {
+        if(enemy_ships[i]) {
+            enemy_ships[i]->x = enemy_ships[i]->initialX + major_axis * cos(*theta);
+            enemy_ships[i]->y = enemy_ships[i]->initialY + minor_axis * sin(*theta);
+        }
+    }
+    *theta -= ENEMY_SHIP_SPEED;
+    if(*theta < -6.248) *theta = 0;
+}

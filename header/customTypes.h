@@ -10,10 +10,10 @@ typedef struct object {
     // constants are defined in constants.h 
     int shape;
 
-    // sizeX and sizeY denote the width and height of the object 
-    // [change this later if necessary]
-    float sizeX;
-    float sizeY;
+    // This is the position where the object was created
+    // used by enemy_ship to plot the elliptic path
+    float initialX;
+    float initialY;
 
     // Denotes the hp of the object 
     // Values for HP are to be defined in constants.h 

@@ -16,8 +16,10 @@ bullet* bullets[MAX_BULLETS];
 // Ship Variables
 bool keyStates[256];
 obj* ship; // space_ship [ controlled by user ]
-obj* enemy_ships[MAX_ENEMY_SHIPS]; // An array that contains pointers to enemy ships
 
+// Enemy Ship Variables
+obj* enemy_ships[MAX_ENEMY_SHIPS]; // An array that contains pointers to enemy ships
+float enemy_ship_angle = 0.0;
 void init(){
     glClearColor(0, 0, 0, 1);
     glMatrixMode( GL_PROJECTION );
@@ -108,6 +110,7 @@ void refresh(){
     // Update Position of space ships / enemy ships etc... 
     move_ship(ship, keyStates);
     move_bullet(bullets, &bulletBufferFilled);
+    move_enemy_ships(enemy_ships, &enemy_ship_angle);
     glutPostRedisplay();
     glutTimerFunc(16, refresh, 0);
 }
