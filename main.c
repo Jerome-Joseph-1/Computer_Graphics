@@ -77,6 +77,10 @@ void createObjects(){
 
 void keyPress(unsigned char key, int x, int y){
     keyStates[key] = 1;
+
+    if(gameState != GAME_START && (key == 'p' || key == 'P') ) {
+        gameState = GAME_START;
+    }
 }
 
 void keyRelease(unsigned char key, int x, int y){
