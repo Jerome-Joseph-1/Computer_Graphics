@@ -160,7 +160,7 @@ void draw_ship(obj* ship){
     glEnable(GL_TEXTURE_2D);
 
     // Bind the texture
-    glBindTexture(GL_TEXTURE_2D, enemyTexture);
+    glBindTexture(GL_TEXTURE_2D, shipTexture);
 
 
     glBegin(GL_QUADS);
@@ -179,12 +179,23 @@ void draw_ship(obj* ship){
 }
 
 void draw_enemy_ship(obj* enemy_ship) {
-    glBegin(GL_LINE_LOOP);
-        glVertex2f(enemy_ship->x - 10, enemy_ship->y - 10);
-        glVertex2f(enemy_ship->x - 10, enemy_ship->y + 10);
-        glVertex2f(enemy_ship->x + 10, enemy_ship->y + 10);
-        glVertex2f(enemy_ship->x + 10, enemy_ship->y - 10);
+    // Enable texture mapping
+    glEnable(GL_TEXTURE_2D);
+
+    // Bind the texture
+    glBindTexture(GL_TEXTURE_2D, enemyTexture);
+    glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
+        glVertex2f(enemy_ship->x - ENEMY_SHIP_WIDTH / 2 , enemy_ship->y - ENEMY_SHIP_HEIGHT / 2);
+        glTexCoord2f(1, 0);
+        glVertex2f(enemy_ship->x + ENEMY_SHIP_WIDTH / 2 , enemy_ship->y - ENEMY_SHIP_HEIGHT / 2);
+        glTexCoord2f(1, 1);
+        glVertex2f(enemy_ship->x + ENEMY_SHIP_WIDTH / 2 , enemy_ship->y + ENEMY_SHIP_HEIGHT / 2);
+        glTexCoord2f(0, 1);
+        glVertex2f(enemy_ship->x - ENEMY_SHIP_WIDTH / 2 , enemy_ship->y + ENEMY_SHIP_HEIGHT / 2);
     glEnd();
+    
+    glDisable(GL_TEXTURE_2D);
 }
 
 void draw_bullets(bullet* bullets[MAX_BULLETS]){
