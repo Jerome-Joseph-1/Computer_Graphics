@@ -96,6 +96,7 @@ void set_up_images(){
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    unsigned char* enemyData= loadImage("textures/enemy.bmp",ENEMY_SHIP_WIDTH,ENEMY_SHIP_HEIGHT);
     unsigned char* backgroundData = loadImage("textures/background.bmp", WINDOW_X, WINDOW_Y);
     unsigned char* shipData = loadImage("textures/ship.bmp", SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT);
 
@@ -115,6 +116,15 @@ void set_up_images(){
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, shipData);
 
+    glGenTextures(1, &enemyTexture);
+    glBindTexture(GL_TEXTURE_2D, enemyTexture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ENEMY_SHIP_WIDTH, ENEMY_SHIP_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, enemyData);
+
+    free(enemyData);
     free(shipData);
     free(backgroundData);
 }
@@ -150,7 +160,7 @@ void draw_ship(obj* ship){
     glEnable(GL_TEXTURE_2D);
 
     // Bind the texture
-    glBindTexture(GL_TEXTURE_2D, shipTexture);
+    glBindTexture(GL_TEXTURE_2D, enemyTexture);
 
 
     glBegin(GL_QUADS);
