@@ -36,5 +36,5 @@ void move_enemy_ships(obj* enemy_ships[MAX_ENEMY_SHIPS], float* theta){
         }
     }
     *theta -= ENEMY_SHIP_SPEED;
-    if(*theta < -6.248) *theta = 0;
+    if(*theta < -(2 * 3.141598)) *theta = 0;
 }
