@@ -38,13 +38,13 @@ void display(){
     // or pass the array of enemy ships to a function and draw each enemy ship
     draw_background();
     if(gameState == GAME_START) {
-        draw_bullets(bullets);
         draw_ship(ship);
         for(int i = 0; i < MAX_ENEMY_SHIPS; i++) {
             if(enemy_ships[i]) {
                 draw_enemy_ship(enemy_ships[i]);
             }
         }
+        draw_bullets(bullets);
     }
     else if(gameState == MAIN_MENU) {
         // Implement Main Menu

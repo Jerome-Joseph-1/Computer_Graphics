@@ -14,6 +14,9 @@ GLuint enemyTexture;
 // Texture ID for the comet image
 GLuint cometTexture;
 
+// Texture ID for the bullet image
+GLuint bulletTexture;
+
 unsigned char* loadImage(char* filename, unsigned int targetWidth, unsigned int targetHeight) {
     FILE* file;
     unsigned char header[54];
@@ -99,6 +102,7 @@ void set_up_images(){
     unsigned char* enemyData= loadImage("textures/enemy.bmp",ENEMY_SHIP_WIDTH,ENEMY_SHIP_HEIGHT);
     unsigned char* backgroundData = loadImage("textures/background.bmp", WINDOW_X, WINDOW_Y);
     unsigned char* shipData = loadImage("textures/ship.bmp", SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT);
+    unsigned char* bulletData = loadImage("textures/bullets/bullet_12_up.bmp", BULLET_WIDTH, BULLET_HEIGHT);
 
     glGenTextures(1, &backgroundTexture);
     glBindTexture(GL_TEXTURE_2D, backgroundTexture);
@@ -124,6 +128,15 @@ void set_up_images(){
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ENEMY_SHIP_WIDTH, ENEMY_SHIP_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, enemyData);
 
+    glGenTextures(1, &bulletTexture);
+    glBindTexture(GL_TEXTURE_2D, bulletTexture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, BULLET_WIDTH, BULLET_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, bulletData);
+
+    free(bulletData);
     free(enemyData);
     free(shipData);
     free(backgroundData);
@@ -199,22 +212,33 @@ void draw_enemy_ship(obj* enemy_ship) {
 }
 
 void draw_bullets(bullet* bullets[MAX_BULLETS]){
-	glPointSize(1.0);
-    glLineWidth(3.0f);
-    glColor4f(0.0f, 1.0f, 0.3f, 0.5f);
+	// glPointSize(1.0);
+    // glLineWidth(3.0f);
+    // glColor4f(0.0f, 1.0f, 0.3f, 0.5f);
 
+    glEnable(GL_TEXTURE_2D);
+
+    // Bind the texture
+    glBindTexture(GL_TEXTURE_2D, bulletTexture);
+    
+    
 	for(int i = 0; i < MAX_BULLETS; i++) {
         if(bullets[i]) {
-            // Set the color and size of the bullet
-            glBegin(GL_LINE_LOOP);
-                glVertex2f(bullets[i]->x, bullets[i]->y - 22);
-                glVertex2f(bullets[i]->x, bullets[i]->y - 10);
-                glVertex2f(bullets[i]->x, bullets[i]->y);
-            glEnd();
 
+            glBegin(GL_QUADS);
+                glTexCoord2f(0, 0);
+                glVertex2f(bullets[i]->x - BULLET_WIDTH / 2 , bullets[i]->y - BULLET_HEIGHT / 2);
+                glTexCoord2f(1, 0);
+                glVertex2f(bullets[i]->x + BULLET_WIDTH / 2 , bullets[i]->y - BULLET_HEIGHT / 2);
+                glTexCoord2f(1, 1);
+                glVertex2f(bullets[i]->x + BULLET_WIDTH / 2 , bullets[i]->y + BULLET_HEIGHT / 2);
+                glTexCoord2f(0, 1);
+                glVertex2f(bullets[i]->x - BULLET_WIDTH / 2 , bullets[i]->y + BULLET_HEIGHT / 2);
+            glEnd();
         }
     }
-	glColor3f(1,1,1);
+
+    glDisable(GL_TEXTURE_2D);
 }
 
 void draw_menu(){
