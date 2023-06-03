@@ -52,3 +52,14 @@ bullet* create_bullet(obj* ship){
 
     return b;
 }
+
+
+
+//Comet object
+comet* create_comet() {
+    comet* c = (comet*)malloc(sizeof(comet));
+    c->x = rand() % WINDOW_X; // Spawn at a random x position
+    c->y = WINDOW_Y + COMET_HEIGHT; // Spawn just outside the top of the window
+    c->speed = 1.0f + ((float)rand() / RAND_MAX) * 3.0f; // Random speed between 1 and 4
+    return c;
+}

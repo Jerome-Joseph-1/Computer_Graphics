@@ -8,6 +8,7 @@
 
 GAME_STATE gameState;
 
+
 // Bullet Variables
 int bulletNumber = 0;
 bool bulletBufferFilled = false;   
@@ -44,7 +45,11 @@ void display(){
                 draw_enemy_ship(enemy_ships[i]);
             }
         }
+<<<<<<< HEAD
         draw_bullets(bullets);
+=======
+        
+>>>>>>> 3a12695 (changes made in order to implement comets)
     }
     else if(gameState == MAIN_MENU) {
         // Implement Main Menu

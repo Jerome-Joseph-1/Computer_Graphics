@@ -8,6 +8,7 @@ void draw_menu();
 void draw_background();
 void draw_enemy_ship(obj* enemy_ship);
 void draw_bullets(bullet* bullets[MAX_BULLETS]);
+void draw_comet(comet* c);//
 
 // functions to load textures
 void set_up_images();

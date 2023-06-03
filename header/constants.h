@@ -40,4 +40,10 @@
 
 #define MAX_BULLETS 5 // Denotes max number of bullets that can be present on screen
 
+//COMETS
+#define MAX_COMETS 5
+#define COMET_WIDTH 50
+#define COMET_HEIGHT 50
+#define SPAWN_DELAY 100
+
 #endif

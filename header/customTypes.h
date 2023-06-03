@@ -18,6 +18,9 @@ typedef struct object {
     // Denotes the hp of the object 
     // Values for HP are to be defined in constants.h 
     float hp;
+
+    //Speed of the comet
+    float speed;
 }obj;
 
 typedef struct Bullet {
@@ -28,10 +31,18 @@ typedef struct Bullet {
 
 } bullet;
 
+typedef struct Comet {
+    float x;
+    float y;
+    float speed;
+}comet;
+
 typedef enum { // Game States
     MAIN_MENU,
     GAME_START,
     GAME_OVER
 }GAME_STATE;
+
+
 
 #endif
