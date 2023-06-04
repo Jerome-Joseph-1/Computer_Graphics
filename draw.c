@@ -102,7 +102,7 @@ void set_up_images(){
     unsigned char* enemyData= loadImage("textures/enemy.bmp",ENEMY_SHIP_WIDTH,ENEMY_SHIP_HEIGHT);
     unsigned char* backgroundData = loadImage("textures/background.bmp", WINDOW_X, WINDOW_Y);
     unsigned char* shipData = loadImage("textures/ship.bmp", SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT);
-    unsigned char* bulletData = loadImage("textures/bullet.bmp", BULLET_WIDTH, BULLET_HEIGHT);
+    unsigned char* bulletData = loadImage("textures/bullets/bullet_12_up.bmp", BULLET_WIDTH, BULLET_HEIGHT);
 
     unsigned char* bulletData = loadImage("textures/bullets/bullet_12_up.bmp", BULLET_WIDTH, BULLET_HEIGHT);
 
