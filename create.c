@@ -29,12 +29,12 @@ obj* create_enemy_ship(int count) {
     enemy_ship->shape = ENEMY_SHIP;
 
     // Calculate and set the position of the enemy ship
-    if(row == 0) {
+    if(row % 2 == 0) {
         enemy_ship->x = initial_x + offset_x * col;
         enemy_ship->y = initial_y - offset_y * row;
     }
 
-    if(row == 1) {
+    else {
         offset_x = 112;
         enemy_ship->x = initial_x - 50 + offset_x * col ;
         enemy_ship->y = initial_y - offset_y * row;

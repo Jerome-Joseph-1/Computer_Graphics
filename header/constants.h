@@ -31,13 +31,13 @@
 // SPEED CONSTANTS
 #define SPACE_SHIP_SPEED 5
 #define SPACE_SHIP_BULLET_SPEED 15
-#define ENEMY_SHIP_SPEED 0.005
+#define ENEMY_SHIP_SPEED 0.0095
 
 
 // MAX COUNT CONSTANTS 
 #define MAX_ENEMY_SHIPS 100
-#define ENEMY_COUNT 20
-#define MAX_PER_ROW 10 // Denotes the number of enemy ships per row
+#define ENEMY_COUNT 24
+#define MAX_PER_ROW 8 // Denotes the number of enemy ships per row
 
 #define MAX_BULLETS 5 // Denotes max number of bullets that can be present on screen
 
