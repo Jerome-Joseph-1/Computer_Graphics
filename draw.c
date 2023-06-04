@@ -103,9 +103,6 @@ void set_up_images(){
     unsigned char* backgroundData = loadImage("textures/background.bmp", WINDOW_X, WINDOW_Y);
     unsigned char* shipData = loadImage("textures/ship.bmp", SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT);
     unsigned char* bulletData = loadImage("textures/bullets/bullet_12_up.bmp", BULLET_WIDTH, BULLET_HEIGHT);
-
-    unsigned char* bulletData = loadImage("textures/bullets/bullet_12_up.bmp", BULLET_WIDTH, BULLET_HEIGHT);
-
     unsigned char* cometData = loadImage("textures/comet.bmp",COMET_WIDTH,COMET_HEIGHT);
 
 
@@ -141,15 +138,13 @@ void set_up_images(){
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, BULLET_WIDTH, BULLET_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, bulletData);
 
-
     glGenTextures(1,&cometTexture);
     glBindTexture(GL_TEXTURE_2D, cometTexture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, BULLET_WIDTH, BULLET_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, cometData);
-
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, COMET_WIDTH, COMET_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, cometData);
 
     free(bulletData);
     free(enemyData);

@@ -43,7 +43,7 @@
 
 //COMETS
 #define MAX_COMETS 5
-#define COMET_WIDTH 80
+#define COMET_WIDTH 40
 #define COMET_HEIGHT 100
 
 #endif
