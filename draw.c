@@ -77,7 +77,6 @@ unsigned char* loadImage(char* filename, unsigned int targetWidth, unsigned int 
 
     // Close the file
     fclose(file);
-
     // Resize the image to the desired dimensions
     unsigned char* resizedData = (unsigned char*)malloc(targetWidth * targetHeight * 4);
     if (!resizedData) {
@@ -95,16 +94,39 @@ unsigned char* loadImage(char* filename, unsigned int targetWidth, unsigned int 
     return resizedData;
 }
 
+void fixColorChannels(unsigned char* imageData, unsigned int numPixels) {
+    for (unsigned int i = 0; i < numPixels; i++) {
+        // Get the color channels
+        unsigned char red = imageData[i * 4];    // Red channel
+        unsigned char green = imageData[i * 4 + 1];  // Green channel
+        unsigned char blue = imageData[i * 4 + 2];       // Blue channel
+
+        // Update the color channels in the image data
+        imageData[i * 4 + 2] = red;
+        imageData[i * 4 + 1] = green;
+        imageData[i * 4] = blue;
+    }
+}
+
+
+
 void set_up_images(){
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    unsigned char* enemyData= loadImage("textures/enemy.bmp",ENEMY_SHIP_WIDTH,ENEMY_SHIP_HEIGHT);
+    unsigned char* enemyData= loadImage("textures/enemy_ship_r.bmp",ENEMY_SHIP_WIDTH,ENEMY_SHIP_HEIGHT);
     unsigned char* backgroundData = loadImage("textures/background.bmp", WINDOW_X, WINDOW_Y);
     unsigned char* shipData = loadImage("textures/ship.bmp", SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT);
     unsigned char* bulletData = loadImage("textures/bullets/bullet_16_up.bmp", BULLET_WIDTH, BULLET_HEIGHT);
     unsigned char* cometData = loadImage("textures/comet.bmp",COMET_WIDTH,COMET_HEIGHT);
-    unsigned char* enemyBulletData = loadImage("textures/bullets/bullet_11_down.bmp", BULLET_WIDTH, BULLET_HEIGHT);
+    unsigned char* enemyBulletData = loadImage("textures/bullets/bullet_14_down.bmp", BULLET_WIDTH, BULLET_HEIGHT);
+
+    fixColorChannels(enemyData, ENEMY_SHIP_WIDTH * ENEMY_SHIP_HEIGHT);
+    fixColorChannels(backgroundData, WINDOW_X * WINDOW_Y);
+    fixColorChannels(shipData, SPACE_SHIP_WIDTH * SPACE_SHIP_HEIGHT);
+    fixColorChannels(bulletData, BULLET_WIDTH * BULLET_HEIGHT);
+    fixColorChannels(cometData, COMET_WIDTH * COMET_HEIGHT);
+    fixColorChannels(enemyBulletData, BULLET_WIDTH * BULLET_HEIGHT);
 
     glGenTextures(1, &backgroundTexture);
     glBindTexture(GL_TEXTURE_2D, backgroundTexture);
