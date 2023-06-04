@@ -83,7 +83,7 @@ void createObjects(){
     // INITIALIZATION
     for(int i = 0; i < MAX_ENEMY_SHIPS; i++) enemy_ships[i] = NULL; // Initialize all enemy ships to NULL
     for(int i = 0; i < MAX_ENEMY_BULLETS; i++) enemy_bullets[i] = NULL; // Initialize all enemy bullets to NULL
-
+    for(int i = 0; i < MAX_BULLETS; i++) bullets[i] = NULL;
     // CREATION
 
     for(int i = 0; i < ENEMY_COUNT; i++){
@@ -97,16 +97,22 @@ void createObjects(){
 }
 
 void create_enemy_bullets_helper(){
-    create_enemy_bullets(enemy_ships, enemy_bullets, &enemyBulletNumber);
-    glutTimerFunc(1000, create_enemy_bullets_helper, 0);
+    if(gameState == GAME_START) {
+        create_enemy_bullets(enemy_ships, enemy_bullets, &enemyBulletNumber);
+        glutTimerFunc(1000, create_enemy_bullets_helper, 0);
+    }
 }
 
 void keyPress(unsigned char key, int x, int y){
     keyStates[key] = 1;
 
-    if(gameState != GAME_START && (key == 'p' || key == 'P') ) {
-        // gameState = GAME_START;
+    if(gameState == GAME_OVER && (key == 'p' || key == 'P')) { 
         initialize_all_objects();
+    }
+
+    else if(gameState != GAME_START && (key == 'p' || key == 'P') ) {
+        gameState = GAME_START;
+        glutTimerFunc(1000, create_enemy_bullets_helper, 0);
     }
 }
 
@@ -127,6 +133,7 @@ void mouseClick(int btn, int state, int x, int y){
             if(x >= 900 && x <= 1000 && y >= 500 && y <= 599){
                 // Start Game
                 gameState = GAME_START;
+                glutTimerFunc(1000, create_enemy_bullets_helper, 0);
             }
             else if(x >= 900 && x <= 1000 && y >= 600 && y <= 710) 
                 exit(0); // Exit the Game 
@@ -145,7 +152,7 @@ void refresh(){
     move_comets(comets);
 
     check_ship_bullet_collision(bullets, enemy_ships, comets);
-    check_enemy_bullet_collision(ship, enemy_bullets);
+    check_enemy_bullet_collision(ship, enemy_bullets, comets);
 
     glutPostRedisplay();
     glutTimerFunc(16, refresh, 0);
@@ -154,7 +161,6 @@ void refresh(){
 void initialize_all_objects(){
     gameState = MAIN_MENU;
     createObjects();
-    glutTimerFunc(1000, create_enemy_bullets_helper, 0);
     set_up_images(); // Present in draw.c 
 }
 
