@@ -52,3 +52,16 @@ void move_comets(comet* comets[MAX_COMETS]) {
     }}
 }
 
+// Move enemy bullets 
+
+void move_enemy_bullet(bullet* enemy_bullets[MAX_ENEMY_BULLETS]) {
+    for(int i = 0; i < MAX_ENEMY_BULLETS; i++) {
+        if(enemy_bullets[i]) {
+            enemy_bullets[i]->y -= ENEMY_SHIP_BULLET_SPEED;
+            if(enemy_bullets[i]->y < 0) free(enemy_bullets[i]), enemy_bullets[i] = NULL;
+        } else {
+            free(enemy_bullets[i]);
+            enemy_bullets[i] = NULL;
+        }
+    }
+}
