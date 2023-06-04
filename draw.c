@@ -118,7 +118,7 @@ void set_up_images(){
     unsigned char* backgroundData = loadImage("textures/background.bmp", WINDOW_X, WINDOW_Y);
     unsigned char* shipData = loadImage("textures/ship.bmp", SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT);
     unsigned char* bulletData = loadImage("textures/bullets/bullet_16_up.bmp", BULLET_WIDTH, BULLET_HEIGHT);
-    unsigned char* cometData = loadImage("textures/comet.bmp",COMET_WIDTH,COMET_HEIGHT);
+    unsigned char* cometData = loadImage("textures/bullets/bullet_19_down.bmp",COMET_WIDTH,COMET_HEIGHT);
     unsigned char* enemyBulletData = loadImage("textures/bullets/bullet_14_down.bmp", BULLET_WIDTH, BULLET_HEIGHT);
 
     fixColorChannels(enemyData, ENEMY_SHIP_WIDTH * ENEMY_SHIP_HEIGHT);
