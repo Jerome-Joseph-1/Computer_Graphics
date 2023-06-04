@@ -5,6 +5,9 @@
 #include "header/draw.h"
 #include "header/create.h"
 #include "header/move.h"
+#include "header/collision.h"
+
+void initialize_all_objects();
 
 GAME_STATE gameState;
 
@@ -66,6 +69,7 @@ void display(){
     }
     else {
         // Game Over 
+        draw_game_over();
         // Display Score
     }
 
@@ -101,7 +105,8 @@ void keyPress(unsigned char key, int x, int y){
     keyStates[key] = 1;
 
     if(gameState != GAME_START && (key == 'p' || key == 'P') ) {
-        gameState = GAME_START;
+        // gameState = GAME_START;
+        initialize_all_objects();
     }
 }
 
@@ -138,6 +143,10 @@ void refresh(){
     move_enemy_bullet(enemy_bullets);
     move_enemy_ships(enemy_ships, &enemy_ship_angle);
     move_comets(comets);
+
+    check_ship_bullet_collision(bullets, enemy_ships, comets);
+    check_enemy_bullet_collision(ship, enemy_bullets);
+
     glutPostRedisplay();
     glutTimerFunc(16, refresh, 0);
 }
