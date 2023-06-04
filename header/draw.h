@@ -2,9 +2,10 @@
 #define DRAW_H
 
 //function prototypes of draw_*
+void draw_menu();
+void draw_game_over();
 
 void draw_ship(obj *point);
-void draw_menu();
 void draw_background();
 void draw_enemy_ship(obj* enemy_ship);
 void draw_bullets(bullet* bullets[MAX_BULLETS]);

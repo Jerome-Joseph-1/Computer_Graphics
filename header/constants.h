@@ -6,8 +6,8 @@
 
 
 // HP CONSTANTS
-#define SHIP_HP 10
-#define ENEYMY_SHIP_HP 7
+#define SHIP_HP 4
+#define ENEMY_SHIP_HP 7
 
 // SHAPE CONSTANTS
 #define SPACE_SHIP 1
@@ -18,8 +18,8 @@
 #define SPACE_SHIP_WIDTH 50
 #define SPACE_SHIP_HEIGHT 95
 
-#define ENEMY_SHIP_WIDTH 75
-#define ENEMY_SHIP_HEIGHT 75
+#define ENEMY_SHIP_WIDTH 60
+#define ENEMY_SHIP_HEIGHT 60
 
 
 #define BULLET_WIDTH 15

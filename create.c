@@ -12,6 +12,8 @@ obj* create_ship(){
     ship->y = WINDOW_Y / 2 - WINDOW_Y / 4;
 
     ship->shape = SPACE_SHIP;
+
+    ship->hp = SHIP_HP;
     return ship;
 }
 
@@ -45,6 +47,8 @@ obj* create_enemy_ship(int count) {
     }
     enemy_ship->initialX = enemy_ship->x;
     enemy_ship->initialY = enemy_ship->y;    
+
+    enemy_ship->hp = ENEMY_SHIP_HP;
     return enemy_ship;
 }
 
@@ -84,7 +88,7 @@ void create_enemy_bullets(obj* enemy_ships[MAX_ENEMY_SHIPS], bullet* enemy_bulle
             float rand_num = (float)rand() / RAND_MAX;
             
             // Define the firing probability threshold
-            float firingThreshold = 0.3;
+            float firingThreshold = 0.5;
 
             if (rand_num < firingThreshold) {
                 glutTimerFunc(rand() % 1000, add_bullet_to_buffer, i);

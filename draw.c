@@ -314,6 +314,33 @@ void draw_menu(){
         glColor3f(1, 1, 1);
 }
 
+void draw_game_over() {
+    const char* titles[] = {"GAME OVER", "PRESS 'P' TO RETURN TO MAIN MENU"};
+    const int numTitles = sizeof(titles) / sizeof(titles[0]);
+        const float yOffset[] = {WINDOW_Y / 2, WINDOW_Y / 2 - WINDOW_Y / 30, WINDOW_Y / 2 - WINDOW_Y / 10};
+
+        void* font = GLUT_BITMAP_HELVETICA_18;
+
+        for (int i = 0; i < numTitles; i++) {
+            const char* title = titles[i];
+            int titleWidth = 0;
+            if(i != 0) 
+                glColor3f(0, 1, 0);
+            for (int j = 0; title[j] != '\0'; j++) {
+                titleWidth += glutBitmapWidth(font, title[j]);
+            }
+
+            glRasterPos2i(WINDOW_X / 2 - titleWidth / 2, yOffset[i]);
+
+            for (int j = 0; title[j] != '\0'; j++) {
+                glutBitmapCharacter(font, title[j]);
+            }
+        }
+
+        // Reset the text color
+        glColor3f(1, 1, 1);
+}
+
 
 
 //Draw comet
