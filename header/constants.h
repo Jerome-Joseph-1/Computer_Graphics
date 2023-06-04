@@ -22,7 +22,7 @@
 #define ENEMY_SHIP_HEIGHT 75
 
 
-#define BULLET_WIDTH 15
+#define BULLET_WIDTH 18
 #define BULLET_HEIGHT 70
 
 //SIZE
