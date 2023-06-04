@@ -14,6 +14,9 @@ int bulletNumber = 0;
 bool bulletBufferFilled = false;   
 bullet* bullets[MAX_BULLETS];
 
+int enemyBulletNumber = 0;
+bullet* enemy_bullets[MAX_ENEMY_BULLETS];
+
 // Ship Variables
 bool keyStates[256];
 obj* ship; // space_ship [ controlled by user ]
@@ -50,6 +53,7 @@ void display(){
             }
         }
         draw_bullets(bullets);
+        draw_enemy_bullets(enemy_bullets);
         for(int i=0;i<MAX_COMETS;i++){
             if(comets[i]){
                 draw_comet(comets[i]);
@@ -74,6 +78,7 @@ void createObjects(){
 
     // INITIALIZATION
     for(int i = 0; i < MAX_ENEMY_SHIPS; i++) enemy_ships[i] = NULL; // Initialize all enemy ships to NULL
+    for(int i = 0; i < MAX_ENEMY_BULLETS; i++) enemy_bullets[i] = NULL; // Initialize all enemy bullets to NULL
 
     // CREATION
 
@@ -84,9 +89,12 @@ void createObjects(){
 
     for(int i=0;i< MAX_COMETS;i++){
         comets[i] = create_comet();
-    }
+    }    
+}
 
-    
+void create_enemy_bullets_helper(){
+    create_enemy_bullets(enemy_ships, enemy_bullets, &enemyBulletNumber);
+    glutTimerFunc(1000, create_enemy_bullets_helper, 0);
 }
 
 void keyPress(unsigned char key, int x, int y){
@@ -124,10 +132,10 @@ void mouseClick(int btn, int state, int x, int y){
 }
 
 void refresh(){
-
     // Update Position of space ships / enemy ships etc... 
     move_ship(ship, keyStates);
     move_bullet(bullets, &bulletBufferFilled);
+    move_enemy_bullet(enemy_bullets);
     move_enemy_ships(enemy_ships, &enemy_ship_angle);
     move_comets(comets);
     glutPostRedisplay();
@@ -137,10 +145,12 @@ void refresh(){
 void initialize_all_objects(){
     gameState = MAIN_MENU;
     createObjects();
+    glutTimerFunc(1000, create_enemy_bullets_helper, 0);
     set_up_images(); // Present in draw.c 
 }
 
 int main(int argc, char** argv){
+    srand(time(0));
     glutInit(&argc, argv);
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
     glutInitWindowSize(WINDOW_X, WINDOW_Y);
