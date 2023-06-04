@@ -36,5 +36,21 @@ void move_enemy_ships(obj* enemy_ships[MAX_ENEMY_SHIPS], float* theta){
         }
     }
     *theta -= ENEMY_SHIP_SPEED;
-    if(*theta < -(2 * 3.141598)) *theta = 0;
+
+    if(*theta < -6.248) *theta = 0;
 }
+
+
+
+//move comets
+void move_comets(comet* comets[MAX_COMETS]) {
+    for (int i = 0; i < MAX_COMETS; i++) {
+        if(comets[i]){
+        comets[i]->y -= comets[i]->speed;
+
+        if (comets[i]->y < 0) {
+            comets[i]->y = WINDOW_Y;  // Set comet y-coordinate to the bottom of the window
+        }
+    }}
+}
+
