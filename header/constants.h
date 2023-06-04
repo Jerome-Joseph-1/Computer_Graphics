@@ -21,8 +21,9 @@
 #define ENEMY_SHIP_WIDTH 75
 #define ENEMY_SHIP_HEIGHT 75
 
-#define BULLET_WIDTH 200
-#define BULLET_HEIGHT 180
+
+#define BULLET_WIDTH 15
+#define BULLET_HEIGHT 50
 
 //SIZE
 #define SIZE 5
@@ -42,7 +43,7 @@
 
 //COMETS
 #define MAX_COMETS 5
-#define COMET_WIDTH 80
+#define COMET_WIDTH 40
 #define COMET_HEIGHT 100
 
 #endif
