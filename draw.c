@@ -14,10 +14,8 @@ GLuint enemyTexture;
 // Texture ID for the comet image
 GLuint cometTexture;
 
-
 // Texture ID for the bullet image
 GLuint bulletTexture;
-
 
 unsigned char* loadImage(char* filename, unsigned int targetWidth, unsigned int targetHeight) {
     FILE* file;
@@ -104,6 +102,7 @@ void set_up_images(){
     unsigned char* enemyData= loadImage("textures/enemy.bmp",ENEMY_SHIP_WIDTH,ENEMY_SHIP_HEIGHT);
     unsigned char* backgroundData = loadImage("textures/background.bmp", WINDOW_X, WINDOW_Y);
     unsigned char* shipData = loadImage("textures/ship.bmp", SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT);
+    unsigned char* bulletData = loadImage("textures/bullet.bmp", BULLET_WIDTH, BULLET_HEIGHT);
 
     unsigned char* bulletData = loadImage("textures/bullets/bullet_12_up.bmp", BULLET_WIDTH, BULLET_HEIGHT);
 
@@ -142,6 +141,7 @@ void set_up_images(){
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, BULLET_WIDTH, BULLET_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, bulletData);
 
+
     glGenTextures(1,&cometTexture);
     glBindTexture(GL_TEXTURE_2D, cometTexture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -150,7 +150,7 @@ void set_up_images(){
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, BULLET_WIDTH, BULLET_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, cometData);
 
-    
+
     free(bulletData);
     free(enemyData);
     free(shipData);
@@ -194,13 +194,13 @@ void draw_ship(obj* ship){
 
     glBegin(GL_QUADS);
         glTexCoord2f(0, 0);
-        glVertex2f(ship->x - SPACE_SHIP_WIDTH / 2 - 5, ship->y - SPACE_SHIP_HEIGHT / 2);
+        glVertex2f(ship->x - SPACE_SHIP_WIDTH / 2 - 2, ship->y - SPACE_SHIP_HEIGHT / 2);
         glTexCoord2f(1, 0);
-        glVertex2f(ship->x + SPACE_SHIP_WIDTH / 2 - 5, ship->y - SPACE_SHIP_HEIGHT / 2);
+        glVertex2f(ship->x + SPACE_SHIP_WIDTH / 2 - 2, ship->y - SPACE_SHIP_HEIGHT / 2);
         glTexCoord2f(1, 1);
-        glVertex2f(ship->x + SPACE_SHIP_WIDTH / 2 - 5, ship->y + SPACE_SHIP_HEIGHT / 2);
+        glVertex2f(ship->x + SPACE_SHIP_WIDTH / 2 - 2, ship->y + SPACE_SHIP_HEIGHT / 2);
         glTexCoord2f(0, 1);
-        glVertex2f(ship->x - SPACE_SHIP_WIDTH / 2 - 5, ship->y + SPACE_SHIP_HEIGHT / 2);
+        glVertex2f(ship->x - SPACE_SHIP_WIDTH / 2 - 2, ship->y + SPACE_SHIP_HEIGHT / 2);
     glEnd();
 
     glDisable(GL_TEXTURE_2D);
@@ -228,20 +228,36 @@ void draw_enemy_ship(obj* enemy_ship) {
 }
 
 void draw_bullets(bullet* bullets[MAX_BULLETS]){
-	
 
+    glEnable(GL_TEXTURE_2D);
+
+    // Bind the texture
+    glBindTexture(GL_TEXTURE_2D, bulletTexture);
+    
+    
 	for(int i = 0; i < MAX_BULLETS; i++) {
         if(bullets[i]) {
             // Set the color and size of the bullet
-            glBegin(GL_LINE_LOOP);
-                glVertex2f(bullets[i]->x, bullets[i]->y - 22);
-                glVertex2f(bullets[i]->x, bullets[i]->y - 10);
-                glVertex2f(bullets[i]->x, bullets[i]->y);
-            glEnd();
+            // glBegin(GL_LINE_LOOP);
+            //     glVertex2f(bullets[i]->x, bullets[i]->y - 22);
+            //     glVertex2f(bullets[i]->x, bullets[i]->y - 10);
+            //     glVertex2f(bullets[i]->x, bullets[i]->y);
+            // glEnd();
 
+            glBegin(GL_QUADS);
+                glTexCoord2f(0, 0);
+                glVertex2f(bullets[i]->x - BULLET_WIDTH / 2 , bullets[i]->y - BULLET_HEIGHT / 2);
+                glTexCoord2f(1, 0);
+                glVertex2f(bullets[i]->x + BULLET_WIDTH / 2 , bullets[i]->y - BULLET_HEIGHT / 2);
+                glTexCoord2f(1, 1);
+                glVertex2f(bullets[i]->x + BULLET_WIDTH / 2 , bullets[i]->y + BULLET_HEIGHT / 2);
+                glTexCoord2f(0, 1);
+                glVertex2f(bullets[i]->x - BULLET_WIDTH / 2 , bullets[i]->y + BULLET_HEIGHT / 2);
+            glEnd();
         }
     }
-	glColor3f(1,1,1);
+
+    glDisable(GL_TEXTURE_2D);
 }
 
 void draw_menu(){
