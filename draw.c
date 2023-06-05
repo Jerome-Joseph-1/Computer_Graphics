@@ -17,6 +17,10 @@ GLuint cometTexture;
 // Texture ID for the bullet image
 GLuint bulletTexture, enemyBulletTexture;
 
+// Texture ID for the Sentry image
+GLuint sentryLeftTexture, sentryRightTexture;
+
+
 unsigned char* loadImage(char* filename, unsigned int targetWidth, unsigned int targetHeight) {
     FILE* file;
     unsigned char header[54];
@@ -113,6 +117,7 @@ void fixColorChannels(unsigned char* imageData, unsigned int numPixels) {
 void set_up_images(){
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glBlendEquation(GL_FUNC_ADD);
 
     unsigned char* enemyData= loadImage("textures/enemy_ship_r.bmp",ENEMY_SHIP_WIDTH,ENEMY_SHIP_HEIGHT);
     unsigned char* backgroundData = loadImage("textures/background.bmp", WINDOW_X, WINDOW_Y);
@@ -120,6 +125,8 @@ void set_up_images(){
     unsigned char* bulletData = loadImage("textures/bullets/bullet_16_up.bmp", BULLET_WIDTH, BULLET_HEIGHT);
     unsigned char* cometData = loadImage("textures/bullets/bullet_19_down.bmp",COMET_WIDTH,COMET_HEIGHT);
     unsigned char* enemyBulletData = loadImage("textures/bullets/bullet_14_down.bmp", BULLET_WIDTH, BULLET_HEIGHT);
+    unsigned char* sentryLeftData = loadImage("textures/sentry_left.bmp", SENTRY_WIDTH, SENTRY_HEIGHT);
+    unsigned char* sentryRightData = loadImage("textures/sentry_right.bmp", SENTRY_WIDTH, SENTRY_HEIGHT);
 
     fixColorChannels(enemyData, ENEMY_SHIP_WIDTH * ENEMY_SHIP_HEIGHT);
     fixColorChannels(backgroundData, WINDOW_X * WINDOW_Y);
@@ -127,6 +134,8 @@ void set_up_images(){
     fixColorChannels(bulletData, BULLET_WIDTH * BULLET_HEIGHT);
     fixColorChannels(cometData, COMET_WIDTH * COMET_HEIGHT);
     fixColorChannels(enemyBulletData, BULLET_WIDTH * BULLET_HEIGHT);
+    fixColorChannels(sentryLeftData, SENTRY_WIDTH * SENTRY_HEIGHT);
+    fixColorChannels(sentryRightData, SENTRY_WIDTH * SENTRY_HEIGHT);
 
     glGenTextures(1, &backgroundTexture);
     glBindTexture(GL_TEXTURE_2D, backgroundTexture);
@@ -176,6 +185,24 @@ void set_up_images(){
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, BULLET_WIDTH, BULLET_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, enemyBulletData);
 
+    glGenTextures(1,&sentryLeftTexture);
+    glBindTexture(GL_TEXTURE_2D, sentryLeftTexture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, SENTRY_WIDTH, SENTRY_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, sentryLeftData);
+
+    glGenTextures(1,&sentryRightTexture);
+    glBindTexture(GL_TEXTURE_2D, sentryRightTexture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, SENTRY_WIDTH, SENTRY_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, sentryRightData);
+
+    free(sentryLeftData);
+    free(sentryRightData);
     free(enemyBulletData);
     free(bulletData);
     free(enemyData);
@@ -382,6 +409,31 @@ void draw_comet(comet* c) {
         glVertex2f(c->x + COMET_WIDTH / 2, c->y + COMET_HEIGHT / 2);
         glTexCoord2f(0, 1);
         glVertex2f(c->x - COMET_WIDTH / 2, c->y + COMET_HEIGHT / 2);
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+}
+
+// Draw Sentry 
+
+void draw_sentry(obj* sentry, int num){
+    glEnable(GL_TEXTURE_2D);
+
+    // Bind the texture
+    if(num == 0)
+        glBindTexture(GL_TEXTURE_2D, sentryLeftTexture);
+    else
+        glBindTexture(GL_TEXTURE_2D, sentryRightTexture);
+
+    glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
+        glVertex2f(sentry->x - SENTRY_WIDTH / 2, sentry->y - SENTRY_HEIGHT / 2);
+        glTexCoord2f(1, 0);
+        glVertex2f(sentry->x + SENTRY_WIDTH / 2, sentry->y - SENTRY_HEIGHT / 2);
+        glTexCoord2f(1, 1);
+        glVertex2f(sentry->x + SENTRY_WIDTH / 2, sentry->y + SENTRY_HEIGHT / 2);
+        glTexCoord2f(0, 1);
+        glVertex2f(sentry->x - SENTRY_WIDTH / 2, sentry->y + SENTRY_HEIGHT / 2);
     glEnd();
 
     glDisable(GL_TEXTURE_2D);
