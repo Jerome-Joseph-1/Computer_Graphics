@@ -23,7 +23,7 @@ obj* create_enemy_ship(int count) {
     int col = count % MAX_PER_ROW;
 
     // Define initial positions and offsets
-    float initial_x = 1920 / 4;
+    float initial_x = 1920 / 4 + 100;
     float initial_y = WINDOW_Y - 150;
     float offset_x = 100;
     float offset_y = 100;
@@ -97,3 +97,11 @@ void create_enemy_bullets(obj* enemy_ships[MAX_ENEMY_SHIPS], bullet* enemy_bulle
     }
 }
 
+obj* create_sentry(float x, float y) {
+    obj* sentry = (obj*)malloc(sizeof(obj));
+    sentry->x = x;
+    sentry->y = y;
+
+    sentry->hp = SENTRY_HP;
+    return sentry;
+}
