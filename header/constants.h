@@ -8,6 +8,7 @@
 // HP CONSTANTS
 #define SHIP_HP 4
 #define ENEMY_SHIP_HP 7
+#define SENTRY_HP 10
 
 // SHAPE CONSTANTS
 #define SPACE_SHIP 1
@@ -24,6 +25,9 @@
 
 #define BULLET_WIDTH 18
 #define BULLET_HEIGHT 70
+
+#define SENTRY_WIDTH 133
+#define SENTRY_HEIGHT 200
 
 //SIZE
 #define SIZE 5
@@ -47,5 +51,6 @@
 #define MAX_COMETS 5
 #define COMET_WIDTH 75
 #define COMET_HEIGHT 150
+#define MAX_SENTRIES 2
 
 #endif
