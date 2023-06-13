@@ -30,9 +30,6 @@ float enemy_ship_angle = 0.0;
 // Comet Variables
 comet* comets[MAX_COMETS];
 
-// Sentry Variables 
-obj* sentries[MAX_SENTRIES];
-
 void init(){
     glClearColor(0, 0, 0, 1);
     glMatrixMode( GL_PROJECTION );
@@ -62,12 +59,6 @@ void display(){
         for(int i=0;i<MAX_COMETS;i++){
             if(comets[i]){
                 draw_comet(comets[i]);
-            }
-        }
-
-        for(int i = 0 ; i < MAX_SENTRIES ; i++ ){
-            if(sentries[i]){
-                draw_sentry(sentries[i], i);
             }
         }
         
@@ -103,9 +94,6 @@ void createObjects(){
     for(int i=0;i< MAX_COMETS;i++){
         comets[i] = create_comet();
     }    
-
-    sentries[0] = create_sentry(SENTRY_WIDTH / 2, WINDOW_Y - SENTRY_HEIGHT / 2);
-    sentries[1] = create_sentry(WINDOW_X - SENTRY_WIDTH / 2, WINDOW_Y - SENTRY_HEIGHT / 2);
 }
 
 void create_enemy_bullets_helper(){

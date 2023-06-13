@@ -96,12 +96,3 @@ void create_enemy_bullets(obj* enemy_ships[MAX_ENEMY_SHIPS], bullet* enemy_bulle
         }
     }
 }
-
-obj* create_sentry(float x, float y) {
-    obj* sentry = (obj*)malloc(sizeof(obj));
-    sentry->x = x;
-    sentry->y = y;
-
-    sentry->hp = SENTRY_HP;
-    return sentry;
-}

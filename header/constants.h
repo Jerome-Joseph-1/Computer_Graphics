@@ -51,6 +51,5 @@
 #define MAX_COMETS 5
 #define COMET_WIDTH 75
 #define COMET_HEIGHT 150
-#define MAX_SENTRIES 2
 
 #endif
