@@ -234,6 +234,20 @@ void draw_ship(obj* ship){
 
     glDisable(GL_TEXTURE_2D);
 
+    glColor3f(1, 0, 0);
+
+    float hp_start_x = ship->x - SPACE_SHIP_WIDTH / 2.0;
+    float hp_end_x = hp_start_x + (float)ship->hp/SHIP_HP * (SPACE_SHIP_WIDTH + 3);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(hp_start_x, ship->y - SPACE_SHIP_HEIGHT);
+        glVertex2f(hp_end_x, ship->y - SPACE_SHIP_HEIGHT);
+        glVertex2f(hp_end_x, ship->y - SPACE_SHIP_HEIGHT + 10);
+        glVertex2f(hp_start_x, ship->y - SPACE_SHIP_HEIGHT + 10);
+    glEnd();
+
+    glColor3f(1, 1, 1);
+
 }
 
 void draw_enemy_ship(obj* enemy_ship) {
@@ -254,6 +268,20 @@ void draw_enemy_ship(obj* enemy_ship) {
     glEnd();
     
     glDisable(GL_TEXTURE_2D);
+
+    glColor3f(1, 0, 0);
+
+    float hp_start_x = enemy_ship->x - ENEMY_SHIP_WIDTH / 4.0;
+    float hp_end_x = hp_start_x + (float)enemy_ship->hp/ENEMY_SHIP_HP * (ENEMY_SHIP_WIDTH / 2.0);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(hp_start_x, enemy_ship->y - ENEMY_SHIP_HEIGHT + 20);
+        glVertex2f(hp_end_x, enemy_ship->y - ENEMY_SHIP_HEIGHT + 20);
+        glVertex2f(hp_end_x, enemy_ship->y - ENEMY_SHIP_HEIGHT + 22);
+        glVertex2f(hp_start_x, enemy_ship->y - ENEMY_SHIP_HEIGHT + 22);
+    glEnd();
+
+    glColor3f(1, 1, 1);
 }
 
 void draw_bullets(bullet* bullets[MAX_BULLETS]){
