@@ -2,6 +2,8 @@
 #include "header/constants.h"
 #include "header/customTypes.h"
 
+extern int score;
+
 // Texture ID for the background image
 GLuint backgroundTexture;
 
@@ -368,7 +370,11 @@ void draw_menu(){
 }
 
 void draw_game_over() {
-    const char* titles[] = {"GAME OVER", "PRESS 'P' TO RETURN TO MAIN MENU"};
+    char score_string[100];
+
+    sprintf(score_string, "Score : %d\n", score);
+
+    const char* titles[] = {"GAME OVER", score_string , "PRESS 'P' TO RETURN TO MAIN MENU"};
     const int numTitles = sizeof(titles) / sizeof(titles[0]);
         const float yOffset[] = {WINDOW_Y / 2, WINDOW_Y / 2 - WINDOW_Y / 30, WINDOW_Y / 2 - WINDOW_Y / 10};
 

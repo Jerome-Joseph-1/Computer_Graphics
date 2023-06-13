@@ -9,6 +9,8 @@
 
 void initialize_all_objects();
 
+int score = 0;
+
 GAME_STATE gameState;
 
 // Bullet Variables
@@ -159,6 +161,7 @@ void refresh(){
 }
 
 void initialize_all_objects(){
+    score = 0;
     gameState = MAIN_MENU;
     createObjects();
     set_up_images(); // Present in draw.c 
