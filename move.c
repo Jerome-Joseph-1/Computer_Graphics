@@ -3,6 +3,7 @@
 #include "header/constants.h"
 
 extern GAME_STATE gameState;
+extern int score;
 
 void move_ship(obj* ship, bool* keyStates) {
     if(ship->hp > 0) {
@@ -41,6 +42,7 @@ void move_enemy_ships(obj* enemy_ships[MAX_ENEMY_SHIPS], float* theta){
                 enemy_ships[i]->x = enemy_ships[i]->initialX + major_axis * cos(*theta);
                 enemy_ships[i]->y = enemy_ships[i]->initialY + minor_axis * sin(*theta);
             } else {
+                score++;
                 free(enemy_ships[i]);
                 enemy_ships[i] = NULL;
             }
