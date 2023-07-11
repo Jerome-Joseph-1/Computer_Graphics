@@ -6,7 +6,7 @@
 
 
 // HP CONSTANTS
-#define SHIP_HP 4
+#define SHIP_HP 10
 #define ENEMY_SHIP_HP 7
 #define SENTRY_HP 10
 
