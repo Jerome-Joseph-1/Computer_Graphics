@@ -425,3 +425,15 @@ void draw_comet(comet* c) {
 }
 
 
+void draw_score(int score) {
+    char score_string[100];
+
+    sprintf(score_string, "Score : %d\n", score);
+    void* font = GLUT_BITMAP_HELVETICA_18;
+
+    glRasterPos2i(WINDOW_X - WINDOW_X / 16, WINDOW_Y - 50);
+
+    for (int j = 0; score_string[j] != '\0'; j++) {
+        glutBitmapCharacter(font, score_string[j]);
+    }
+}

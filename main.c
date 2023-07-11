@@ -60,6 +60,7 @@ void display(){
     gameOver();
     draw_background();
     if(gameState == GAME_START) {
+        draw_score(score);
         draw_ship(ship);
         for(int i = 0; i < MAX_ENEMY_SHIPS; i++) {
             if(enemy_ships[i]) {
