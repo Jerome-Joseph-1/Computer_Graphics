@@ -374,10 +374,12 @@ void draw_game_over() {
 
     sprintf(score_string, "Score : %d\n", score);
 
-    const char* titles[] = {"GAME OVER", score_string , "PRESS 'P' TO RETURN TO MAIN MENU"};
+    const char* titles[] = {"", "GAME OVER", score_string , "PRESS 'P' TO RETURN TO MAIN MENU"};
     const int numTitles = sizeof(titles) / sizeof(titles[0]);
-        const float yOffset[] = {WINDOW_Y / 2, WINDOW_Y / 2 - WINDOW_Y / 30, WINDOW_Y / 2 - WINDOW_Y / 10};
-
+    const float yOffset[] = {WINDOW_Y/2 + WINDOW_Y / 30, WINDOW_Y / 2, WINDOW_Y / 2 - WINDOW_Y / 30, WINDOW_Y / 2 - WINDOW_Y / 10};
+    if(score == 16) {
+        titles[0] = "YOU WIN";
+    }
         void* font = GLUT_BITMAP_HELVETICA_18;
 
         for (int i = 0; i < numTitles; i++) {
