@@ -13,6 +13,8 @@ int score = 0;
 
 GAME_STATE gameState;
 
+
+
 // Bullet Variables
 int bulletNumber = 0;
 bool bulletBufferFilled = false;   
@@ -32,6 +34,18 @@ float enemy_ship_angle = 0.0;
 // Comet Variables
 comet* comets[MAX_COMETS];
 
+
+void gameOver(){
+    bool flag = true;
+    for(int i = 0; i < MAX_ENEMY_SHIPS; i++)if(enemy_ships[i]) {
+        flag = false;
+    }
+
+    if(flag) gameState = GAME_OVER;
+}
+
+
+
 void init(){
     glClearColor(0, 0, 0, 1);
     glMatrixMode( GL_PROJECTION );
@@ -43,11 +57,7 @@ void init(){
 
 void display(){
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
-    // Display code goes here
-
-    // TODO: Use a for loop to display the enemy ships individually
-    // or pass the array of enemy ships to a function and draw each enemy ship
+    gameOver();
     draw_background();
     if(gameState == GAME_START) {
         draw_ship(ship);
@@ -77,6 +87,8 @@ void display(){
 
     glutSwapBuffers();
 }
+
+
 
 void createObjects(){
     ship = create_ship();
