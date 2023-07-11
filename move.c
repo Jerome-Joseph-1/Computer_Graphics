@@ -60,6 +60,7 @@ void move_comets(comet* comets[MAX_COMETS]) {
         comets[i]->y -= comets[i]->speed;
 
         if (comets[i]->y < 0) {
+            comets[i]->x = rand() % WINDOW_X;
             comets[i]->y = WINDOW_Y;  // Set comet y-coordinate to the top of the window
         }
     }}
